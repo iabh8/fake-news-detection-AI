@@ -8,7 +8,7 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-model_name_or_path = './MODEL'
+model_name_or_path = 'hamzab/roberta-fake-news-classification'
 tokenizer = RobertaTokenizer.from_pretrained(model_name_or_path)
 model = RobertaForSequenceClassification.from_pretrained(model_name_or_path)
 
