@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Validate Text News Article</h5>
+        <form method="POST">
+            <div class="form-group">
+                <label for="news_text">Enter News Text:</label>
+                <textarea class="form-control" id="news_text" name="news_text" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Validate</button>
+        </form>
+
+        {% if result %}
+        <div class="mt-4">
+            <h5>Validation Result:</h5>
+            <p><strong>LABEL_1 (Real):</strong> {{ result.score_label_1 }}</p>
+            <p><strong>LABEL_0 (Fake):</strong> {{ result.score_label_0 }}</p>
+            <p><strong>Conclusion:</strong> {{ result.conclusion }}</p>
+
+            <form method="POST" action="{{ url_for('feedback', article_id=result.article_id) }}">
+                <div class="form-group">
+                    <label>Was the prediction correct?</label>
+                    <div>
+                        <button type="submit" name="feedback" value="correct" class="btn btn-success">Yes</button>
+                        <button type="submit" name="feedback" value="incorrect" class="btn btn-danger">No</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
